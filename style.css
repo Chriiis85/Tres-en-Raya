@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #252525;
+  font-family: "Bebas Neue", sans-serif;
+  color: white;
+}
+
+h1 {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+  color: white;
+  font-size: 3em;
+}
+table {
+  width: 500px;
+  height: 500px;
+  border-spacing: 10px;
+}
+table td {
+  border: 3px solid white;
+  transition: 0.5s;
+
+  z-index: 0;
+}
+table td:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  z-index: 99;
+}
+
+.contenido {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  background-color: blue;
+}
+
+.estadistica {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  background-color: red;
+  gap: 10px;
+}
+
+.modosjuegojugadores {
+  width: 80%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 20px;
+  background-color: greenyellow;
+}
+
+.main-contenedor-juego {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 20px;
+  background-color: pink;
+}
+.contenedor-juego {
+  width: 40%;
+  height: 90%;
+  background-color: red;
+}
+
+.tiempo {
+  width: 80%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: aqua;
+}
+
+.modojuegofichas {
+  width: 80%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 50px;
+  background-color: yellow;
+}
+
+/*BOTOENES MODO DE JUEGO*/
