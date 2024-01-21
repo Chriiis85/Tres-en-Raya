@@ -12,42 +12,96 @@
     <h1>EL JUEGO DE LAS TRES EN RAYA</h1>
 
     <section class="contenido">
-      <table>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+      <table class="tabla-juego" id="tabla">
+        <!--<tr>
+          <td><p></p></td>
+          <td><p></p></td>
+          <td><p></p></td>
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
+          <td><p></p></td>
+          <td><p></p></td>
+          <td><p></p></td>
+        </tr><tr>
+          <td><p></p></td>
+          <td><p></p></td>
+          <td><p></p></td>
+        </tr>-->
       </table>
     </section>
     <section class="estadistica">
       <article class="modosjuegojugadores">
-        <h2>Jugadores:</h2>
-        <button>Jugador VS Aleatorio</button>
-        <button>Jugador VS IA</button>
-        <button>Jugador VS Jugador</button>
+        <h2>Selecciona el Modo de Jugador:</h2>
+        <div>
+          <button class="button-30" role="button">Jugador VS Aleatorio</button>
+          <button class="button-30" role="button">Jugador VS IA</button>
+          <button class="button-30" role="button">Jugador VS Jugador</button>
+        </div>
       </article>
       <article class="tiempo">
         <h2>Tiempo de Juego/Resultados:</h2>
         <div class="main-contenedor-juego">
-          <div class="contenedor-juego"></div>
-          <div class="contenedor-juego"></div>
+          <div class="contenedor-juego">
+            <div class="puntos" id="estadistica-jugador1">
+              <div class="puntos-nombre">
+                <p>JUGADOR UNO</p>
+              </div>
+              <div class="puntos-stats">
+                <table class="tabla-puntos">
+                  <tr>
+                    <td>Ganado:</td>
+                    <td> 1 Partida(s)</td>
+                  </tr>
+                  <tr>
+                    <td>Perdido:</td>
+                    <td>1 Partida(s)</td>
+                  </tr>
+                  <tr>
+                    <td>Empatado:</td>
+                    <td>1 Partida(s)</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="puntos-tiempo">
+                <p>Tiempo Restante:&nbsp;30 sec.</p>
+              </div>
+            </div>           
+          </div>
+          
+          <div class="contenedor-juego">
+            <div class="puntos" id="estadistica-jugador1">
+              <div class="puntos-nombre">
+                <p>JUGADOR DOS</p>
+              </div>
+              <div class="puntos-stats">
+                <table class="tabla-puntos">
+                  <tr>
+                    <td>Ganado:</td>
+                    <td> 1 Partida(s)</td>
+                  </tr>
+                  <tr>
+                    <td>Perdido:</td>
+                    <td>1 Partida(s)</td>
+                  </tr>
+                  <tr>
+                    <td>Empatado:</td>
+                    <td>1 Partida(s)</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="puntos-tiempo">
+                <p>Tiempo Restante:&nbsp;30 sec.</p>
+              </div>
+            </div>           
+          </div>
         </div>
       </article>
       <article class="modojuegofichas">
-        <h2>Modos de Juego:</h2>
-        <button>Jugar con 6 Fichas</button>
-        <button>JUgar con 9 Fichas</button>
+        <h2>Selecciona el Modo de Juego:</h2>
+        <div>
+          <button class="button-30" role="button">Jugar con 6 Fichas</button>
+          <button class="button-30" role="button">Jugar con 9 Fichas</button>
+        </div>
       </article>
     </section>
   </body>
