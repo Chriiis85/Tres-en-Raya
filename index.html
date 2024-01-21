@@ -33,13 +33,13 @@
       <article class="modosjuegojugadores">
         <h2>Selecciona el Modo de Jugador:</h2>
         <div>
-          <button class="button-30" role="button">Jugador VS Aleatorio</button>
-          <button class="button-30" role="button">Jugador VS IA</button>
-          <button class="button-30" role="button">Jugador VS Jugador</button>
+          <button id="jugale" class="button-30" role="button">Jugador VS Aleatorio</button>
+          <button id="jugia" class="button-30" role="button">Jugador VS IA</button>
+          <button id="jugjug" class="button-30" role="button">Jugador VS Jugador</button>
         </div>
       </article>
       <article class="tiempo">
-        <h2>Tiempo de Juego/Resultados:</h2>
+        <h2>Tiempo de Juego Y Resultados:</h2>
         <div class="main-contenedor-juego">
           <div class="contenedor-juego">
             <div class="puntos" id="estadistica-jugador1">
@@ -63,7 +63,7 @@
                 </table>
               </div>
               <div class="puntos-tiempo">
-                <p>Tiempo Restante:&nbsp;30 sec.</p>
+                <p>Tiempo Restante Jugada:&nbsp;30 sec.</p>
               </div>
             </div>           
           </div>
@@ -90,7 +90,7 @@
                 </table>
               </div>
               <div class="puntos-tiempo">
-                <p>Tiempo Restante:&nbsp;30 sec.</p>
+                <p>Tiempo Restante Jugada:&nbsp;30 sec.</p>
               </div>
             </div>           
           </div>
@@ -99,10 +99,13 @@
       <article class="modojuegofichas">
         <h2>Selecciona el Modo de Juego:</h2>
         <div>
-          <button class="button-30" role="button">Jugar con 6 Fichas</button>
-          <button class="button-30" role="button">Jugar con 9 Fichas</button>
+          <button id="6fichas" class="button-30" role="button">Jugar con 6 Fichas</button>
+          <button id="empezardenuevo" class="button-30" role="button">Empezar de nuevo</button>
+          <button id="9fichas" class="button-30" role="button">Jugar con 9 Fichas</button>
         </div>
       </article>
+      
     </section>
   </body>
+  
 </html>
