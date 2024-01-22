@@ -33,9 +33,15 @@
       <article class="modosjuegojugadores">
         <h2>Selecciona el Modo de Jugador:</h2>
         <div>
-          <button id="jugale" class="button-30" role="button">Jugador VS Aleatorio</button>
-          <button id="jugia" class="button-30" role="button">Jugador VS IA</button>
-          <button id="jugjug" class="button-30" role="button">Jugador VS Jugador</button>
+          <button id="jugale" class="button-30" role="button">
+            Jugador VS Aleatorio
+          </button>
+          <button id="jugia" class="button-30" role="button">
+            Jugador VS IA
+          </button>
+          <button id="jugjug" class="button-30" role="button">
+            Jugador VS Jugador
+          </button>
         </div>
       </article>
       <article class="tiempo">
@@ -50,24 +56,24 @@
                 <table class="tabla-puntos">
                   <tr>
                     <td>Ganado:</td>
-                    <td> 1 Partida(s)</td>
+                    <td id="partidas-ganadas-1"></td>
                   </tr>
                   <tr>
                     <td>Perdido:</td>
-                    <td>1 Partida(s)</td>
+                    <td id="partidas-perdidas-1"></td>
                   </tr>
                   <tr>
                     <td>Empatado:</td>
-                    <td>1 Partida(s)</td>
+                    <td id="partidas-empatadas-1"></td>
                   </tr>
                 </table>
               </div>
               <div class="puntos-tiempo">
-                <p>Tiempo Restante Jugada:&nbsp;30 sec.</p>
+                <p id="contador-1"></p>
               </div>
-            </div>           
+            </div>
           </div>
-          
+
           <div class="contenedor-juego">
             <div class="puntos" id="estadistica-jugador1">
               <div class="puntos-nombre">
@@ -77,35 +83,40 @@
                 <table class="tabla-puntos">
                   <tr>
                     <td>Ganado:</td>
-                    <td> 1 Partida(s)</td>
+                    <td id="partidas-ganadas-2"></td>
                   </tr>
                   <tr>
                     <td>Perdido:</td>
-                    <td>1 Partida(s)</td>
+                    <td id="partidas-perdidas-2"></td>
                   </tr>
                   <tr>
                     <td>Empatado:</td>
-                    <td>1 Partida(s)</td>
+                    <td id="partidas-empatadas-2"></td>
                   </tr>
                 </table>
               </div>
               <div class="puntos-tiempo">
-                <p>Tiempo Restante Jugada:&nbsp;30 sec.</p>
+                <p id="contador-2"></p>
               </div>
-            </div>           
+            </div>
           </div>
         </div>
+        <p id="tiempo-partida"></p>
       </article>
       <article class="modojuegofichas">
         <h2>Selecciona el Modo de Juego:</h2>
         <div>
-          <button id="6fichas" class="button-30" role="button">Jugar con 6 Fichas</button>
-          <button id="empezardenuevo" class="button-30" role="button">Empezar de nuevo</button>
-          <button id="9fichas" class="button-30" role="button">Jugar con 9 Fichas</button>
+          <button id="6fichas" class="button-30" role="button">
+            Jugar con 6 Fichas
+          </button>
+          <button id="empezardenuevo" class="button-30" role="button">
+            Empezar de nuevo
+          </button>
+          <button id="9fichas" class="button-30" role="button">
+            Jugar con 9 Fichas
+          </button>
         </div>
       </article>
-      
     </section>
   </body>
-  
 </html>

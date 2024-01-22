@@ -21,7 +21,7 @@ h1 {
   font-size: 3em;
 }
 
-h2{
+h2 {
   font-size: 2em;
 }
 .tabla-juego {
@@ -53,7 +53,7 @@ h2{
   /*background-color: blue;*/
 }
 
-.contenido > button{
+.contenido > button {
   padding-top: 100px;
 }
 
@@ -75,12 +75,12 @@ h2{
   align-items: center;
   justify-content: center;
   flex-direction: column;
- /* background-color: greenyellow;*/
+  /* background-color: greenyellow;*/
 }
 .modosjuegojugadores > h2 {
-  margin-bottom: -25px;
-  font-size: 2em;
+  margin-bottom: -10px;
 }
+
 .modosjuegojugadores > div {
   width: 100%;
   height: 100%;
@@ -111,15 +111,16 @@ h2{
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 }
 
-.puntos{
+.puntos {
   width: 90%;
   height: 90%;
   background-color: white;
+  color: black;
   border: 2px solid black;
   border-radius: 5px;
 }
 
-.puntos-nombre{
+.puntos-nombre {
   width: 100%;
   height: 20%;
   display: flex;
@@ -129,12 +130,12 @@ h2{
   font-size: 25px;
 }
 
-.puntos-stats{
+.puntos-stats {
   width: 100%;
   height: 60%;
 }
 
-.puntos-tiempo{
+.puntos-tiempo {
   width: 100%;
   height: 20%;
   display: flex;
@@ -144,7 +145,13 @@ h2{
   font-size: 20px;
   color: black;
 }
-.tabla-puntos{
+
+#tiempo-partida {
+  color: white;
+  font-size: 1.3em;
+  margin-top: -5px;
+}
+.tabla-puntos {
   width: 100%;
   height: 100%;
   display: flex;
@@ -155,11 +162,10 @@ h2{
   font-size: 20px;
   color: black;
 }
-.tabla-puntos > tr{
+.tabla-puntos > tr {
   border: 1px solid black;
-
 }
-.tabla-puntos > td{
+.tabla-puntos > td {
   border: 1px solid black;
   background-color: aqua;
   width: 100%;
@@ -176,7 +182,7 @@ h2{
   /*background-color: aqua;*/
 }
 
-.tiempo >h2{
+.tiempo > h2 {
   margin-bottom: -5px;
 }
 
