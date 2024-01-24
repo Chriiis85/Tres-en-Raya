@@ -1,6 +1,8 @@
 /*SELECTOR DE ELEMENTOS*/
 let tabla = document.querySelector("#tabla");
 let botones = document.querySelectorAll("button");
+let textoturno = document.getElementById("turnojugador");
+var tipoPartida;
 
 /*CONTADOR DE PARTIDAS*/
 contPartidasGanadasJugador1 = 10;
@@ -33,11 +35,107 @@ let partidasEmpatadasJugador2 = (document.getElementById(
 /*TABLRE Y FILAS*/
 let numerofilas = 3;
 let numerocolumnas = 3;
-let tablero = [];
+var tablero = [];
 
 /*TIEMPOS DE PARTIDA*/
 let tiempoPartida = 180;
-var segundosdisponiblepartida = 30;
+
+var turnoJugador1 = new Boolean(true);
+
+function gestionJuego() {
+  switch (tipoPartida) {
+    case "jugadorvsjugador":
+      pintarTablero();
+      generarTablero();
+      seleccionarCasilla();
+      textoturno.textContent = "Comienza la Partida, Turno del Jugador1.";
+      break;
+    case "jugadorvsaleatorio":
+      pintarTablero();
+      generarTablero();
+      seleccionarCasilla();
+      textoturno.textContent = "Comienza la Partida, Turno del Jugador1.";
+      break;
+    case "empezardenuevo":
+      location.reload();
+      break;
+    default:
+      break;
+  }
+}
+
+function hasGanado() {
+  setTimeout(() => {
+    alert("Ha ganado el jugador: " + turnoJugador());
+    location.reload();
+  }, "150");
+}
+function ganar() {
+  if (tablero[0][0] == 1 && tablero[0][1] == 1 && tablero[0][2] == 1) {
+    hasGanado();
+  }
+  if (tablero[1][0] == 1 && tablero[1][1] == 1 && tablero[1][2] == 1) {
+    hasGanado();
+  }
+  if (tablero[2][0] == 1 && tablero[2][1] == 1 && tablero[2][2] == 1) {
+    hasGanado();
+  }
+  if (tablero[0][0] == 2 && tablero[0][1] == 2 && tablero[0][2] == 2) {
+    hasGanado();
+  }
+  if (tablero[1][0] == 2 && tablero[1][1] == 2 && tablero[1][2] == 2) {
+    hasGanado();
+  }
+  if (tablero[2][0] == 2 && tablero[2][1] == 2 && tablero[2][2] == 2) {
+    hasGanado();
+  }
+}
+
+function reset() {
+  for (let i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.length; i++) {
+      tablero[i][j] = 0;
+    }
+  }
+}
+
+/*GESTIONAR BOTONES*/
+function gestionarBotones() {
+  for (let boton of botones) {
+    boton.addEventListener("click", function () {
+      let botonseleccionado = boton.getAttribute("id");
+      switch (botonseleccionado) {
+        case "jugale":
+          console.log("Botón Jugador contra Aleatorio");
+          tipoPartida = "jugadorvsaleatorio";
+          gestionJuego();
+          break;
+        case "jugia":
+          console.log("Botón Jugador contra IA");
+          break;
+        case "jugjug":
+          console.log("Botón Jugador contra Jugador");
+          tipoPartida = "jugadorvsjugador";
+          gestionJuego();
+          break;
+        case "seis-fichas":
+          console.log("Botón 6 fichas");
+
+          break;
+        case "empezardenuevo":
+          console.log("Botón empezar de nuevo");
+          tipoPartida = "empezardenuevo";
+          gestionJuego();
+
+          break;
+        case "nuevefichas":
+          console.log("Botón 9 fichas");
+
+          break;
+      }
+    });
+  }
+}
 
 /*PINTAR TABLERO ARRAY*/
 function pintarTablero() {
@@ -59,56 +157,76 @@ function generarTablero() {
   for (let i = 0; i < numerofilas; i++) {
     const columnas = [];
     for (let j = 0; j < numerocolumnas; j++) {
-      columnas.push(j);
+      columnas.push(0);
     }
     tablero.push(columnas);
   }
 }
 
-/*SELECCIONAR CASILLA TD*/
+/*RECOGE TODOS LOS LISTENER DE LAS CASILLAS TD*/
 function seleccionarCasilla() {
   let posiciones = document.querySelectorAll("td");
   for (let posicion of posiciones) {
     posicion.addEventListener("click", function () {
-      console.log(posicion);
+      let fila = posicion.parentNode.rowIndex;
+      let columna = posicion.cellIndex;
+      gestionarCasilla(fila, columna);
+      ganar();
     });
   }
 }
 
-/*GESTIONAR BOTONES*/
-function gestionarBotones() {
-  for (let boton of botones) {
-    boton.addEventListener("click", function () {
-      let botonseleccionado = boton.getAttribute("id");
-      switch (botonseleccionado) {
-        case "jugale":
-          console.log("Botón Jugador contra Aleatorio");
-          break;
-        case "jugia":
-          console.log("Botón Jugador contra IA");
-          break;
-        case "jugjug":
-          console.log("Botón Jugador contra Jugador");
-          break;
-        case "6fichas":
-          console.log("Botón 6 fichas");
-
-          break;
-        case "empezardenuevo":
-          console.log("Botón empezar de nuevo");
-
-          break;
-        case "9fichas":
-          console.log("Botón 9 fichas");
-
-          break;
+function generarAleatorio() {
+  let filaleatoria = Math.floor(Math.random() * 3);
+  let columnaleatoria = Math.floor(Math.random() * 3);
+  let aleatorioValido = false;
+  for (let i = 0; i < tablero.length; i++) {
+    for (let j = 0; j < tablero[i].length; j++) {
+      if (tablero[j][i] == 0) {
+        aleatorioValido = true;
+        break;
       }
-    });
+    }
   }
+  if (!aleatorioValido) {
+    alert("Han empatado");
+    return;
+  }
+  if (tablero[filaleatoria][columnaleatoria] == 0) {
+    gestionarCasilla(filaleatoria, columnaleatoria);
+  } else {
+    generarAleatorio();
+  }
+}
+function gestionarCasilla(fila, columna) {
+  if (tablero[fila][columna] == 0) {
+    if (turnoJugador1) {
+      tablero[fila][columna] = 1;
+      turnoJugador1 = false;
+      pintarCasilla(fila, columna, "blue");
+      textoturno.textContent = "Turno del Jugador 2";
+      if (tipoPartida == "jugadorvsaleatorio") {
+        generarAleatorio();
+      }
+    } else {
+      tablero[fila][columna] = 2;
+      turnoJugador1 = true;
+      pintarCasilla(fila, columna, "red");
+      textoturno.textContent = "Turno del Jugador 1";
+    }
+  } else {
+    textoturno.textContent = "Casilla ya seleccionada";
+  }
+}
+
+function pintarCasilla(fila, columna, color) {
+  let td = tabla.childNodes[fila + 3].childNodes[columna];
+  td.style.backgroundColor = color;
 }
 
 /*CONTADOR TIEMPO RESTANTE JUGADA JUGADOR*/
 function contador() {
+  let segundosdisponiblepartida = 30;
   let contador1 = (document.getElementById("contador-1").innerHTML =
     "Tiempo restante jugada: " + segundosdisponiblepartida);
   let contador2 = (document.getElementById("contador-2").innerHTML =
@@ -120,7 +238,13 @@ function contador() {
     setTimeout("contador()", 1000);
   }
 }
-
+function turnoJugador() {
+  if (turnoJugador1) {
+    return "jugador1";
+  } else {
+    return "jugador2";
+  }
+}
 /*TEMPORIZADOR PARTIDA TOTAL*/
 function temporizadorPartida() {
   let tiempo = (document.getElementById("tiempo-partida").innerHTML =
@@ -133,11 +257,8 @@ function temporizadorPartida() {
   }
 }
 
-pintarTablero();
-generarTablero();
-seleccionarCasilla();
+//contador();
+//temporizadorPartida();
+/*Esencial para arrancar*/
 gestionarBotones();
-contador();
-temporizadorPartida();
-console.log(seleccionarCasilla());
-console.log(tablero);
+//reset();

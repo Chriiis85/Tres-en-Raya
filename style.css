@@ -53,6 +53,10 @@ h2 {
   /*background-color: blue;*/
 }
 
+#turnojugador {
+  font-size: 2em;
+}
+
 .contenido > button {
   padding-top: 100px;
 }
@@ -260,4 +264,18 @@ h2 {
 .button-30:active {
   box-shadow: #d6d6e7 0 3px 7px inset;
   transform: translateY(2px);
+}
+
+#seisfichas {
+  background-color: lightseagreen;
+  color: white;
+}
+#nuevefichas {
+  background-color: lightseagreen;
+  color: white;
+}
+
+#empezardenuevo {
+  background-color: lightgreen;
+  color: white;
 }
