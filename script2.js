@@ -4,14 +4,6 @@ let botones = document.querySelectorAll("button");
 let textoturno = document.getElementById("turnojugador");
 let contadorjugador1 = document.getElementById("contador-1");
 let contadorjugador2 = document.getElementById("contador-2");
-
-/*BOTONES DEL DOM CADA UNO*/
-let botonjug = document.getElementById("jugjug");
-let botonaleatorio = document.getElementById("jugale");
-let botonIA = document.getElementById("jugia");
-
-/*BOOLEANO SI QUEDAN CASILLAS*/
-var restanCasillas = true;
 /*RECOGER DOM CONTADOR DE PARTIDAS*/
 let textopartidasganadasjugador1 =
   document.getElementById("partidas-ganadas-1");
@@ -51,46 +43,37 @@ let turnoJugador = "jugador1";
 /*RESETEAR LA PARTIDA */
 function reset() {
   clearInterval(contador);
+
+  partidasganadasjugador1 = 0;
+  partidasempatadasjugador2 = 0;
+  partidasperdidasjugador1 = 0;
+  partidasganadasjugador2 = 0;
+  partidasempatadasjugador1 = 0;
+  partidasperdidasjugador2 = 0;
+
   turnoJugador = "jugador1";
   textoturno.textContent = "Turno del Jugador 1";
 }
 
-/*RESETEAR LOS BOTONES SELECCIONADOS*/
-function resetBotones() {
-  botonjug.style.backgroundColor = "white";
-  botonIA.style.backgroundColor = "white";
-  botonaleatorio.style.backgroundColor = "white";
-}
-
-/*RESETEAR LAS ESTADISTICAS*/
-function resetPartidas() {
-  partidasganadasjugador1 = 0;
-  partidasganadasjugador2 = 0;
-  partidasempatadasjugador1 = 0;
-  partidasempatadasjugador2 = 0;
-  partidasperdidasjugador1 = 0;
-  partidasperdidasjugador2 = 0;
-}
-
-/*VERIFICAR SI QUEDAN CASILLAS RESTANTES*/
-function quedanCasillas() {
-  for (let i = 0; i < tablero.length; i++) {
-    for (let j = 0; j < tablero.length; j++) {
-      if (tablero[i][j] == 0) {
-        restanCasillas = true;
-        return;
-      } else {
-        restanCasillas = false;
-      }
-    }
-  }
+function mostrarEstadisticas() {
+  textopartidasganadasjugador1.textContent =
+    partidasganadasjugador1 + " Partida(s)";
+  textopartidasempatadasjugador1.textContent =
+    partidasempatadasjugador1 + " Partida(s)";
+  textopartidasperdidasjugador1.textContent =
+    partidasperdidasjugador1 + " Partida(s)";
+  textopartidasganadasjugador2.textContent =
+    partidasganadasjugador2 + " Partida(s)";
+  textopartidasempatadasjugador2.textContent =
+    partidasempatadasjugador2 + " Partida(s)";
+  textopartidasperdidasjugador2.textContent =
+    partidasperdidasjugador2 + " Partida(s)";
 }
 /*GENERAR UNA NUEVA PARTIDA DESDE CERO*/
 function generarJuego() {
   reset();
   turnoJugador = "jugador1";
   textoturno.textContent = "Turno del Jugador 1";
-  pintarTablero();
   generarTablero();
   casillaSeleccionada();
   mostrarEstadisticas();
@@ -151,15 +134,6 @@ function gestionarBotones() {
           tipoPartida = "jugadorvsjugador";
           gestionarJuego();
           break;
-        case "jugale":
-          tipoPartida = "jugadorvsaleatorio";
-          gestionarJuego();
-          break;
-        case "jugia":
-          tipoPartida = "jugadorvsia";
-          gestionarJuego();
-          break;
-
         case "empezardenuevo":
           generarJuego();
           break;
@@ -172,28 +146,6 @@ function gestionarJuego() {
   switch (tipoPartida) {
     case "jugadorvsjugador":
       textoturno.textContent = "Turno del Jugador 1";
-      botonjug.style.backgroundColor = "lightgreen";
-      botonIA.style.backgroundColor = "white";
-      botonaleatorio.style.backgroundColor = "white";
-      reset();
-      generarJuego();
-      //cronometro();
-      break;
-    case "jugadorvsaleatorio":
-      textoturno.textContent = "Turno del Jugador 1";
-      botonaleatorio.style.backgroundColor = "lightgreen";
-      botonIA.style.backgroundColor = "white";
-      botonjug.style.backgroundColor = "white";
-      reset();
-      generarJuego();
-      //cronometro();
-      break;
-    case "jugadorvsia":
-      textoturno.textContent = "Turno del Jugador 1";
-      botonIA.style.backgroundColor = "lightgreen";
-      botonaleatorio.style.backgroundColor = "white";
-      botonjug.style.backgroundColor = "white";
-      reset();
       generarJuego();
       //cronometro();
       break;
@@ -207,144 +159,61 @@ function gestionarJuego() {
 function buscarGanador() {
   if (tablero[0][0] == 1 && tablero[0][1] == 1 && tablero[0][2] == 1) {
     partidasganadasjugador1++;
-    partidasperdidasjugador2++;
     mostrarGanador();
   } else if (tablero[1][0] == 1 && tablero[1][1] == 1 && tablero[1][2] == 1) {
-    partidasganadasjugador1++;
-    partidasperdidasjugador2++;
     mostrarGanador();
   } else if (tablero[2][0] == 1 && tablero[2][1] == 1 && tablero[2][2] == 1) {
-    partidasganadasjugador1++;
-    partidasperdidasjugador2++;
     mostrarGanador();
   } else if (tablero[0][0] == 2 && tablero[0][1] == 2 && tablero[0][2] == 2) {
-    partidasganadasjugador2++;
-    partidasperdidasjugador1++;
     mostrarGanador();
   } else if (tablero[1][0] == 2 && tablero[1][1] == 2 && tablero[1][2] == 2) {
-    partidasganadasjugador2++;
-    partidasperdidasjugador1++;
     mostrarGanador();
   } else if (tablero[2][0] == 2 && tablero[2][1] == 2 && tablero[2][2] == 2) {
-    partidasganadasjugador2++;
-    partidasperdidasjugador1++;
     mostrarGanador();
   } else if (tablero[0][0] == 1 && tablero[1][0] == 1 && tablero[2][0] == 1) {
-    partidasganadasjugador1++;
-    partidasperdidasjugador2++;
     mostrarGanador();
   } else if (tablero[0][1] == 1 && tablero[1][1] == 1 && tablero[2][1] == 1) {
-    partidasganadasjugador1++;
-    partidasperdidasjugador2++;
     mostrarGanador();
   } else if (tablero[0][2] == 1 && tablero[1][2] == 1 && tablero[2][2] == 1) {
-    partidasganadasjugador1++;
-    partidasperdidasjugador2++;
     mostrarGanador();
   } else if (tablero[0][0] == 2 && tablero[1][0] == 2 && tablero[2][0] == 2) {
-    partidasganadasjugador2++;
-    partidasperdidasjugador1++;
     mostrarGanador();
   } else if (tablero[0][1] == 2 && tablero[1][1] == 2 && tablero[2][1] == 2) {
-    partidasganadasjugador2++;
-    partidasperdidasjugador1++;
     mostrarGanador();
   } else if (tablero[0][2] == 2 && tablero[1][2] == 2 && tablero[2][2] == 2) {
-    partidasganadasjugador2++;
-    partidasperdidasjugador1++;
     mostrarGanador();
   } else if (tablero[0][0] == 1 && tablero[1][1] == 1 && tablero[2][2] == 1) {
-    partidasganadasjugador1++;
-    partidasperdidasjugador2++;
     mostrarGanador();
   } else if (tablero[0][2] == 1 && tablero[1][1] == 1 && tablero[2][0] == 1) {
-    partidasganadasjugador1++;
-    partidasperdidasjugador2++;
     mostrarGanador();
   } else if (tablero[0][0] == 2 && tablero[1][1] == 2 && tablero[2][2] == 2) {
-    partidasganadasjugador2++;
-    partidasperdidasjugador1++;
     mostrarGanador();
   } else if (tablero[0][2] == 2 && tablero[1][1] == 2 && tablero[2][0] == 2) {
-    partidasganadasjugador2++;
-    partidasperdidasjugador1++;
     mostrarGanador();
   }
 }
 
 /*MUESTRA UN MENSAJE DE QUIEN HA GANADO*/
 function mostrarGanador() {
-  gestionarTurno(turnoJugador);
-  setTimeout(function () {
-    alert("Ha ganado el jugador: " + turnoJugador);
-    generarJuego();
-  }, 200);
-}
-
-function mostrarEstadisticas() {
-  textopartidasganadasjugador1.textContent =
-    partidasganadasjugador1 + " Partida(s)";
-  textopartidasempatadasjugador1.textContent =
-    partidasempatadasjugador1 + " Partida(s)";
-  textopartidasperdidasjugador1.textContent =
-    partidasperdidasjugador1 + " Partida(s)";
-  textopartidasganadasjugador2.textContent =
-    partidasganadasjugador2 + " Partida(s)";
-  textopartidasempatadasjugador2.textContent =
-    partidasempatadasjugador2 + " Partida(s)";
-  textopartidasperdidasjugador2.textContent =
-    partidasperdidasjugador2 + " Partida(s)";
-}
-
-function empatarPartida() {
-  setTimeout(function () {
-    alert("No quedan casillas se acaba la partida en empate.");
-    partidasempatadasjugador2++;
-    partidasempatadasjugador1++;
-    mostrarEstadisticas();
-    generarJuego();
-  }, 200);
-}
-
-function casillaAleatoria() {
-  let filaleatoria = Math.floor(Math.random() * 3);
-  let columnaleatoria = Math.floor(Math.random() * 3);
-  if (tablero[filaleatoria][columnaleatoria] == 0) {
-    pintarEnCasilla(filaleatoria, columnaleatoria, "red");
-    tablero[filaleatoria][columnaleatoria] = 2;
-    turnoJugador = "jugador1";
-    textoturno.textContent = "Turno del Jugador 1";
-    buscarGanador();
-  } else {
-    casillaAleatoria();
-  }
+  generarJuego();
+  alert("Ha ganado el jugador: " + turnoJugador);
 }
 
 function gestionarCasilla(fila, columna) {
-  if (restanCasillas) {
-    if (tablero[fila][columna] == 0) {
-      if (turnoJugador == "jugador1") {
-        tablero[fila][columna] = 1;
-        pintarEnCasilla(fila, columna, "blue");
-        gestionarTurno(turnoJugador);
-        buscarGanador();
-        if (tipoPartida == "jugadorvsaleatorio" && turnoJugador == "jugador2") {
-          casillaAleatoria();
-        }
-      } else if (turnoJugador == "jugador2") {
-        tablero[fila][columna] = 2;
-        pintarEnCasilla(fila, columna, "red");
-        gestionarTurno(turnoJugador);
-        buscarGanador();
-      }
-    } else {
-      alert("La casilla ya esta seleccionada");
+  if (tablero[fila][columna] == 0) {
+    if (turnoJugador == "jugador1") {
+      tablero[fila][columna] = 1;
+      pintarEnCasilla(fila, columna, "blue");
+      buscarGanador();
+      gestionarTurno(turnoJugador);
+    } else if (turnoJugador == "jugador2") {
+      tablero[fila][columna] = 2;
+      pintarEnCasilla(fila, columna, "red");
+      buscarGanador();
+      gestionarTurno(turnoJugador);
     }
-  }
-
-  quedanCasillas();
-  if (!restanCasillas) {
-    empatarPartida();
+  } else {
+    alert("La casilla ya esta seleccionada");
   }
 }
 
