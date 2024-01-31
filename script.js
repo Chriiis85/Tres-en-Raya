@@ -9,6 +9,8 @@ let contadorjugador2 = document.getElementById("contador-2");
 let botonjug = document.getElementById("jugjug");
 let botonaleatorio = document.getElementById("jugale");
 let botonIA = document.getElementById("jugia");
+let botonseisfichas = document.getElementById("seisfichas");
+let botonnuevefichas = document.getElementById("nuevefichas");
 
 /*BOOLEANO SI QUEDAN CASILLAS*/
 var restanCasillas = true;
@@ -43,8 +45,9 @@ let numerocolumnas = 3;
 var tablero = [];
 let contador;
 
-/*Definir el tipo de partida*/
+/*Definir el tipo de partida o fichas*/
 let tipoPartida;
+let tipoFichas;
 /*Definir el turno del jugador*/
 let turnoJugador = "jugador1";
 
@@ -131,6 +134,7 @@ function casillaSeleccionada() {
     posicion.addEventListener("click", function () {
       let fila = posicion.parentNode.rowIndex;
       let columna = posicion.cellIndex;
+
       gestionarCasilla(fila, columna);
     });
   }
@@ -142,11 +146,20 @@ function pintarEnCasilla(fila, columna, color) {
   td.style.backgroundColor = color;
 }
 
+/*GESTIONA LOS BOTONES Y LAS ELECCIONES*/
 function gestionarBotones() {
   for (let boton of botones) {
     boton.addEventListener("click", function () {
       let botonseleccionado = boton.getAttribute("id");
       switch (botonseleccionado) {
+        case "seisfichas":
+          tipoFichas = "seisfichas";
+          gestionarJuego();
+          break;
+        case "nuevefichas":
+          tipoFichas = "nuevefichas";
+          gestionarJuego();
+          break;
         case "jugjug":
           tipoPartida = "jugadorvsjugador";
           gestionarJuego();
@@ -159,7 +172,6 @@ function gestionarBotones() {
           tipoPartida = "jugadorvsia";
           gestionarJuego();
           break;
-
         case "empezardenuevo":
           generarJuego();
           break;
@@ -168,41 +180,63 @@ function gestionarBotones() {
   }
 }
 
+/*FUNCION PRINCIPAL GESTIONA EL JUEGO Y LOS TIPOS*/
 function gestionarJuego() {
-  switch (tipoPartida) {
-    case "jugadorvsjugador":
-      textoturno.textContent = "Turno del Jugador 1";
-      botonjug.style.backgroundColor = "lightgreen";
-      botonIA.style.backgroundColor = "white";
-      botonaleatorio.style.backgroundColor = "white";
-      reset();
-      generarJuego();
-      //cronometro();
+  switch (tipoFichas) {
+    case "seisfichas":
+      botonseisfichas.style.backgroundColor = "lightgreen";
+      botonnuevefichas.style.backgroundColor = "white";
       break;
-    case "jugadorvsaleatorio":
-      textoturno.textContent = "Turno del Jugador 1";
-      botonaleatorio.style.backgroundColor = "lightgreen";
-      botonIA.style.backgroundColor = "white";
-      botonjug.style.backgroundColor = "white";
-      reset();
-      generarJuego();
-      //cronometro();
-      break;
-    case "jugadorvsia":
-      textoturno.textContent = "Turno del Jugador 1";
-      botonIA.style.backgroundColor = "lightgreen";
-      botonaleatorio.style.backgroundColor = "white";
-      botonjug.style.backgroundColor = "white";
-      reset();
-      generarJuego();
-      //cronometro();
-      break;
+    case "nuevefichas":
+      botonnuevefichas.style.backgroundColor = "lightgreen";
+      botonseisfichas.style.backgroundColor = "white";
+      switch (tipoPartida) {
+        case "jugadorvsjugador":
+          gestionarColorBotones(tipoPartida);
+          reset();
+          generarJuego();
+          //cronometro();
+          break;
+        case "jugadorvsaleatorio":
+          gestionarColorBotones(tipoPartida);
+          reset();
+          generarJuego();
+          //cronometro();
+          break;
+        case "jugadorvsia":
+          gestionarColorBotones(tipoPartida);
+          reset();
+          generarJuego();
+          //cronometro();
+          break;
 
-    default:
+        default:
+          break;
+      }
       break;
   }
 }
 
+/*GESTIONA EL COLOR DE LOS BOTONES*/
+function gestionarColorBotones(tipo) {
+  switch (tipo) {
+    case "jugadorvsjugador":
+      botonjug.style.backgroundColor = "lightgreen";
+      botonIA.style.backgroundColor = "white";
+      botonaleatorio.style.backgroundColor = "white";
+      break;
+    case "jugadorvsaleatorio":
+      botonaleatorio.style.backgroundColor = "lightgreen";
+      botonIA.style.backgroundColor = "white";
+      botonjug.style.backgroundColor = "white";
+      break;
+    case "jugadorvsia":
+      botonIA.style.backgroundColor = "lightgreen";
+      botonaleatorio.style.backgroundColor = "white";
+      botonjug.style.backgroundColor = "white";
+      break;
+  }
+}
 /*BUSCA Y COMPRUEBA QUIEN HA GANADO*/
 function buscarGanador() {
   if (tablero[0][0] == 1 && tablero[0][1] == 1 && tablero[0][2] == 1) {
@@ -281,6 +315,7 @@ function mostrarGanador() {
   }, 200);
 }
 
+/*MUESTRA LAS ESTADISTICAS DEL USUARIO*/
 function mostrarEstadisticas() {
   textopartidasganadasjugador1.textContent =
     partidasganadasjugador1 + " Partida(s)";
@@ -296,6 +331,7 @@ function mostrarEstadisticas() {
     partidasperdidasjugador2 + " Partida(s)";
 }
 
+/*MUESTRA AL USUARIO EL EMPATE DE UNA PARTIDA*/
 function empatarPartida() {
   setTimeout(function () {
     alert("No quedan casillas se acaba la partida en empate.");
@@ -306,6 +342,7 @@ function empatarPartida() {
   }, 200);
 }
 
+/*COLOCA UNA CASILLA ALEATORIA*/
 function casillaAleatoria() {
   let filaleatoria = Math.floor(Math.random() * 3);
   let columnaleatoria = Math.floor(Math.random() * 3);
@@ -320,6 +357,7 @@ function casillaAleatoria() {
   }
 }
 
+/*GESTIONA LAS CASILLAS Y COMO SE HACE EL FUNCIONAMIENTO INTERNAMENTE*/
 function gestionarCasilla(fila, columna) {
   if (restanCasillas) {
     if (tablero[fila][columna] == 0) {
@@ -330,6 +368,9 @@ function gestionarCasilla(fila, columna) {
         buscarGanador();
         if (tipoPartida == "jugadorvsaleatorio" && turnoJugador == "jugador2") {
           casillaAleatoria();
+        }
+        if (tipoPartida == "jugadorvsia" && turnoJugador == "jugador2") {
+          colocarIA();
         }
       } else if (turnoJugador == "jugador2") {
         tablero[fila][columna] = 2;
@@ -348,6 +389,7 @@ function gestionarCasilla(fila, columna) {
   }
 }
 
+/*GESTIONA Y CAMBIAR EL TURNO DEL JUGADOR*/
 function gestionarTurno(jugador) {
   clearInterval(contador);
 
@@ -367,6 +409,13 @@ function cronometro() {
 
   contador = setInterval(function () {
     if (segundos == 0) {
+      if (turnoJugador == "jugador1") {
+        partidasganadasjugador2++;
+        partidasperdidasjugador1++;
+      } else {
+        partidasganadasjugador1++;
+        partidasperdidasjugador2++;
+      }
       alert("Se acabó el tiempo");
       generarJuego();
     } else {
@@ -380,6 +429,100 @@ function cronometro() {
       }
     }
   }, 1000);
+}
+
+/*FUNCION DE COLOCAR UNA CASILLA POR PARTE DE LA IA*/
+function colocarIA() {
+  for (let i = 0; i < 3; i++) {
+    if (tablero[i][0] == 2 && tablero[i][1] == 2 && tablero[i][2] == 0) {
+      pintarEnCasilla(filaleatoria, columnaleatoria, "red");
+      tablero[i][2] = 2;
+      turnoJugador = "jugador1";
+      textoturno.textContent = "Turno del Jugador 1";
+      buscarGanador();
+      return;
+    }
+    if (tablero[i][0] == 2 && tablero[i][2] == 2 && tablero[i][1] == 0) {
+      pintarEnCasilla(filaleatoria, columnaleatoria, "red");
+      tablero[i][1] = 2;
+      turnoJugador = "jugador1";
+      textoturno.textContent = "Turno del Jugador 1";
+      buscarGanador();
+      return;
+    }
+    if (tablero[i][1] == 2 && tablero[i][2] == 2 && tablero[i][0] == 0) {
+      pintarEnCasilla(filaleatoria, columnaleatoria, "red");
+      tablero[i][0] = 2;
+      turnoJugador = "jugador1";
+      textoturno.textContent = "Turno del Jugador 1";
+      buscarGanador();
+      return;
+    }
+    if (tablero[0][i] == 2 && tablero[1][i] == 2 && tablero[2][i] == 0) {
+      pintarEnCasilla(filaleatoria, columnaleatoria, "red");
+      tablero[2][i] = 2;
+      turnoJugador = "jugador1";
+      textoturno.textContent = "Turno del Jugador 1";
+      buscarGanador();
+      return;
+    }
+    if (tablero[0][i] == 2 && tablero[2][i] == 2 && tablero[1][i] == 0) {
+      pintarEnCasilla(filaleatoria, columnaleatoria, "red");
+      tablero[1][i] = 2;
+      turnoJugador = "jugador1";
+      textoturno.textContent = "Turno del Jugador 1";
+      buscarGanador();
+      return;
+    }
+    if (tablero[1][i] == 2 && tablero[2][i] == 2 && tablero[0][i] == 0) {
+      pintarEnCasilla(filaleatoria, columnaleatoria, "red");
+      tablero[0][i] = 2;
+      turnoJugador = "jugador1";
+      textoturno.textContent = "Turno del Jugador 1";
+      buscarGanador();
+      return;
+    }
+  }
+  if (tablero[0][0] == 2 && tablero[1][1] == 2 && tablero[2][2] == 0) {
+    pintarEnCasilla(filaleatoria, columnaleatoria, "red");
+    tablero[2][2] = 2;
+    turnoJugador = "jugador1";
+    textoturno.textContent = "Turno del Jugador 1";
+    buscarGanador();
+    return;
+  }
+  if (tablero[0][0] == 2 && tablero[2][2] == 2 && tablero[1][1] == 0) {
+    pintarEnCasilla(filaleatoria, columnaleatoria, "red");
+    tablero[1][1] = 2;
+    turnoJugador = "jugador1";
+    textoturno.textContent = "Turno del Jugador 1";
+    buscarGanador();
+    return;
+  }
+  if (tablero[2][2] == 2 && tablero[1][1] == 2 && tablero[0][0] == 0) {
+    pintarEnCasilla(filaleatoria, columnaleatoria, "red");
+    tablero[0][0] = 2;
+    turnoJugador = "jugador1";
+    textoturno.textContent = "Turno del Jugador 1";
+    buscarGanador();
+    return;
+  }
+  if (tablero[0][2] == 2 && tablero[1][1] == 2 && tablero[2][0] == 0) {
+    pintarEnCasilla(filaleatoria, columnaleatoria, "red");
+    tablero[2][0] = 2;
+    turnoJugador = "jugador1";
+    textoturno.textContent = "Turno del Jugador 1";
+    buscarGanador();
+    return;
+  }
+  if (tablero[2][0] == 2 && tablero[1][1] == 2 && tablero[0][2] == 0) {
+    pintarEnCasilla(filaleatoria, columnaleatoria, "red");
+    tablero[0][2] = 2;
+    turnoJugador = "jugador1";
+    textoturno.textContent = "Turno del Jugador 1";
+    buscarGanador();
+    return;
+  }
 }
 
 gestionarBotones();
