@@ -447,10 +447,14 @@ function gestionarCasilla(fila, columna) {
         gestionarTurno(turnoJugador);
         buscarGanador();
         if (tipoPartida == "jugadorvsaleatorio" && turnoJugador == "jugador2") {
-          casillaAleatoria();
+          setTimeout(function () {
+            casillaAleatoria();
+          }, 300);
         }
         if (tipoPartida == "jugadorvsia" && turnoJugador == "jugador2") {
-          colocarIA();
+          setTimeout(function () {
+            colocarIA();
+          }, 300);
         }
       } else if (turnoJugador == "jugador2") {
         tablero[fila][columna] = 2;
@@ -484,7 +488,7 @@ function gestionarTurno(jugador) {
 
 /*CONTADOR PARA LOS SEGUNDOS RESTANTES DEL MOVIMIENTO*/
 function cronometro() {
-  let segundos = 300;
+  let segundos = 30;
 
   contador = setInterval(function () {
     if (segundos == 0) {
@@ -562,7 +566,57 @@ function colocarIA() {
       buscarGanador();
       return;
     }
+    /*BLOQUEA AL JUGADOR*/
+    if (tablero[i][0] == 1 && tablero[i][1] == 1 && tablero[i][2] == 0) {
+      pintarEnCasilla(i, 2, "red");
+      tablero[i][2] = 2;
+      turnoJugador = "jugador1";
+      textoturno.textContent = "Turno del Jugador 1";
+      buscarGanador();
+      return;
+    }
+    if (tablero[i][0] == 1 && tablero[i][2] == 1 && tablero[i][1] == 0) {
+      pintarEnCasilla(i, 1, "red");
+      tablero[i][1] = 2;
+      turnoJugador = "jugador1";
+      textoturno.textContent = "Turno del Jugador 1";
+      buscarGanador();
+      return;
+    }
+    if (tablero[i][1] == 1 && tablero[i][2] == 1 && tablero[i][0] == 0) {
+      pintarEnCasilla(i, 0, "red");
+      tablero[i][0] = 2;
+      turnoJugador = "jugador1";
+      textoturno.textContent = "Turno del Jugador 1";
+      buscarGanador();
+      return;
+    }
+    if (tablero[0][i] == 1 && tablero[1][i] == 1 && tablero[2][i] == 0) {
+      pintarEnCasilla(2, i, "red");
+      tablero[2][i] = 2;
+      turnoJugador = "jugador1";
+      textoturno.textContent = "Turno del Jugador 1";
+      buscarGanador();
+      return;
+    }
+    if (tablero[0][i] == 1 && tablero[2][i] == 1 && tablero[1][i] == 0) {
+      pintarEnCasilla(1, i, "red");
+      tablero[1][i] = 2;
+      turnoJugador = "jugador1";
+      textoturno.textContent = "Turno del Jugador 1";
+      buscarGanador();
+      return;
+    }
+    if (tablero[1][i] == 1 && tablero[2][i] == 1 && tablero[0][i] == 0) {
+      pintarEnCasilla(0, i, "red");
+      tablero[0][i] = 2;
+      turnoJugador = "jugador1";
+      textoturno.textContent = "Turno del Jugador 1";
+      buscarGanador();
+      return;
+    }
   }
+  /*TRATA DE GANAR ELLA SOLA*/
   if (tablero[0][0] == 2 && tablero[1][1] == 2 && tablero[2][2] == 0) {
     pintarEnCasilla(2, 2, "red");
     tablero[2][2] = 2;
@@ -603,6 +657,48 @@ function colocarIA() {
     buscarGanador();
     return;
   }
+  /*TRATA DE BLOQUEARTE A TI*/
+  if (tablero[0][0] == 1 && tablero[1][1] == 1 && tablero[2][2] == 0) {
+    pintarEnCasilla(2, 2, "red");
+    tablero[2][2] = 2;
+    turnoJugador = "jugador1";
+    textoturno.textContent = "Turno del Jugador 1";
+    buscarGanador();
+    return;
+  }
+  if (tablero[0][0] == 1 && tablero[2][2] == 1 && tablero[1][1] == 0) {
+    pintarEnCasilla(1, 1, "red");
+    tablero[1][1] = 2;
+    turnoJugador = "jugador1";
+    textoturno.textContent = "Turno del Jugador 1";
+    buscarGanador();
+    return;
+  }
+  if (tablero[2][2] == 1 && tablero[1][1] == 1 && tablero[0][0] == 0) {
+    pintarEnCasilla(0, 0, "red");
+    tablero[0][0] = 2;
+    turnoJugador = "jugador1";
+    textoturno.textContent = "Turno del Jugador 1";
+    buscarGanador();
+    return;
+  }
+  if (tablero[0][2] == 1 && tablero[1][1] == 1 && tablero[2][0] == 0) {
+    pintarEnCasilla(2, 0, "red");
+    tablero[2][0] = 2;
+    turnoJugador = "jugador1";
+    textoturno.textContent = "Turno del Jugador 1";
+    buscarGanador();
+    return;
+  }
+  if (tablero[2][0] == 1 && tablero[1][1] == 1 && tablero[0][2] == 0) {
+    pintarEnCasilla(0, 2, "red");
+    tablero[0][2] = 2;
+    turnoJugador = "jugador1";
+    textoturno.textContent = "Turno del Jugador 1";
+    buscarGanador();
+    return;
+  }
+
   casillaAleatoria();
 }
 
