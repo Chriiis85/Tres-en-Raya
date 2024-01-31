@@ -220,7 +220,7 @@ function gestionarJuego() {
           gestionarColorBotones(tipoPartida);
           reset();
           generarJuego();
-          //cronometro();
+          cronometro();
           break;
       }
       break;
@@ -232,19 +232,19 @@ function gestionarJuego() {
           gestionarColorBotones(tipoPartida);
           reset();
           generarJuego();
-          //cronometro();
+          cronometro();
           break;
         case "jugadorvsaleatorio":
           gestionarColorBotones(tipoPartida);
           reset();
           generarJuego();
-          //cronometro();
+          cronometro();
           break;
         case "jugadorvsia":
           gestionarColorBotones(tipoPartida);
           reset();
           generarJuego();
-          //cronometro();
+          cronometro();
           break;
 
         default:
@@ -488,7 +488,7 @@ function gestionarTurno(jugador) {
 
 /*CONTADOR PARA LOS SEGUNDOS RESTANTES DEL MOVIMIENTO*/
 function cronometro() {
-  let segundos = 30;
+  let segundos = 31;
 
   contador = setInterval(function () {
     if (segundos == 0) {
