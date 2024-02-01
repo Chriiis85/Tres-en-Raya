@@ -65,6 +65,9 @@ function reset() {
   clearInterval(tiempoTotal);
   contfichasjug1 = 3;
   contfichasjug2 = 3;
+  tiempoTotalTexto.textContent = "Tiempo restante de Partida: 0";
+  contadorjugador1.innerHTML = "Tiempo Restante: 0";
+  contadorjugador2.innerHTML = "Tiempo Restante: 0";
   turnoJugador = "jugador1";
   textoturno.textContent = "Turno del Jugador 1";
 }
@@ -102,6 +105,8 @@ function quedanCasillas() {
 /*GENERAR UNA NUEVA PARTIDA DESDE CERO*/
 function generarJuego() {
   reset();
+  cronometroTotal();
+  cronometro();
   turnoJugador = "jugador1";
   textoturno.textContent = "Turno del Jugador 1";
   pintarTablero();
@@ -222,22 +227,16 @@ function gestionarJuego() {
           gestionarColorBotones(tipoPartida);
           reset();
           generarJuego();
-          cronometro();
-          cronometroTotal();
           break;
         case "jugadorvsaleatorio":
           gestionarColorBotones(tipoPartida);
           reset();
           generarJuego();
-          cronometro();
-          cronometroTotal();
           break;
         case "jugadorvsia":
           gestionarColorBotones(tipoPartida);
           reset();
           generarJuego();
-          cronometro();
-          cronometroTotal();
           break;
       }
       break;
@@ -249,22 +248,16 @@ function gestionarJuego() {
           gestionarColorBotones(tipoPartida);
           reset();
           generarJuego();
-          cronometro();
-          cronometroTotal();
           break;
         case "jugadorvsaleatorio":
           gestionarColorBotones(tipoPartida);
           reset();
           generarJuego();
-          cronometro();
-          cronometroTotal();
           break;
         case "jugadorvsia":
           gestionarColorBotones(tipoPartida);
           reset();
           generarJuego();
-          cronometro();
-          cronometroTotal();
           break;
 
         default:
@@ -448,7 +441,7 @@ function gestionarCasillaSeisFichas(fila, columna) {
     } else {
       if (tablero[fila][columna] == 2) {
         tablero[fila][columna] = 0;
-        pintarEnCasilla(fila, columna, "black");
+        pintarEnCasilla(fila, columna, "transparent");
         contfichasjug2++;
       }
     }
@@ -537,13 +530,13 @@ function cronometro() {
 
 /*CONTADOR PARA LOS SEGUNDOS RESTANTES DEL MOVIMIENTO*/
 function cronometroTotal() {
-  let segundos = 180;
+  let segundos = 181;
 
-  contadorTotal = setInterval(function () {
+  tiempoTotal = setInterval(function () {
     if (segundos == 0) {
       partidasempatadasjugador1++;
       partidasempatadasjugador2++;
-      alert("Se acabó el tiempo");
+      alert("Se acabó el tiempo de la Partida");
       generarJuego();
     } else {
       segundos--;
