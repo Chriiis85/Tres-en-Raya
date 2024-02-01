@@ -4,6 +4,7 @@ let botones = document.querySelectorAll("button");
 let textoturno = document.getElementById("turnojugador");
 let contadorjugador1 = document.getElementById("contador-1");
 let contadorjugador2 = document.getElementById("contador-2");
+let tiempoTotalTexto = document.getElementById("tiempo-partida");
 
 /*BOTONES DEL DOM CADA UNO*/
 let botonjug = document.getElementById("jugjug");
@@ -44,6 +45,7 @@ let numerofilas = 3;
 let numerocolumnas = 3;
 var tablero = [];
 let contador;
+let tiempoTotal;
 
 /*Definir el tipo de partida o fichas*/
 let tipoPartida;
@@ -51,14 +53,18 @@ let tipoFichas;
 /*Definir el turno del jugador*/
 let turnoJugador = "jugador1";
 
+/**/
+let contfichasjug1 = 3;
+let contfichasjug2 = 3;
 /*Boleano que controla cuando se mueve una casilla*/
 let moverCasilla = false;
 
 /*RESETEAR LA PARTIDA */
 function reset() {
   clearInterval(contador);
-  quedanFichasJugador1 = true;
-  quedanFichasJugador2 = true;
+  clearInterval(tiempoTotal);
+  contfichasjug1 = 3;
+  contfichasjug2 = 3;
   turnoJugador = "jugador1";
   textoturno.textContent = "Turno del Jugador 1";
 }
@@ -148,25 +154,21 @@ function casillaSeleccionada() {
     });
   }
 }
-let quedanFichasJugador1 = true;
-let quedanFichasJugador2 = true;
-function hay3CasillasPuestas() {
-  let cont1 = 0;
-  let cont2 = 0;
-  for (let i = 0; i < tablero.length; i++) {
-    for (let j = 0; j < tablero.length; j++) {
-      if (tablero[i][j] == 1) {
-        cont1++;
-      } else if (tablero[i][j] == 2) {
-        cont2++;
-      }
+
+function hay3CasillasPuestas(jugador) {
+  if (jugador == "jugador1") {
+    if (contfichasjug1 === 0) {
+      return true;
+    } else {
+      return false;
     }
   }
-  if (cont1 > 2) {
-    quedanFichasJugador1 = false;
-  }
-  if (cont2 > 2) {
-    quedanFichasJugador2 = false;
+  if (jugador == "jugador2") {
+    if (contfichasjug2 === 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 /*PINTAR CASILLA QUE SE SELECCIONE*/
@@ -221,6 +223,21 @@ function gestionarJuego() {
           reset();
           generarJuego();
           cronometro();
+          cronometroTotal();
+          break;
+        case "jugadorvsaleatorio":
+          gestionarColorBotones(tipoPartida);
+          reset();
+          generarJuego();
+          cronometro();
+          cronometroTotal();
+          break;
+        case "jugadorvsia":
+          gestionarColorBotones(tipoPartida);
+          reset();
+          generarJuego();
+          cronometro();
+          cronometroTotal();
           break;
       }
       break;
@@ -233,18 +250,21 @@ function gestionarJuego() {
           reset();
           generarJuego();
           cronometro();
+          cronometroTotal();
           break;
         case "jugadorvsaleatorio":
           gestionarColorBotones(tipoPartida);
           reset();
           generarJuego();
           cronometro();
+          cronometroTotal();
           break;
         case "jugadorvsia":
           gestionarColorBotones(tipoPartida);
           reset();
           generarJuego();
           cronometro();
+          cronometroTotal();
           break;
 
         default:
@@ -394,42 +414,43 @@ function casillaAleatoria() {
   }
 }
 function gestionarCasillaSeisFichas(fila, columna) {
-  hay3CasillasPuestas();
-  if (restanCasillas) {
-    if (tablero[fila][columna] == 0) {
-      if (turnoJugador == "jugador1") {
-        if (quedanFichasJugador1) {
-          tablero[fila][columna] = 1;
-          pintarEnCasilla(fila, columna, "blue");
-          gestionarTurno(turnoJugador);
-          buscarGanador();
-          if (
-            tipoPartida == "jugadorvsaleatorio" &&
-            turnoJugador == "jugador2"
-          ) {
-            casillaAleatoria();
-          }
-          if (tipoPartida == "jugadorvsia" && turnoJugador == "jugador2") {
-            colocarIA();
-          }
-        } else {
-          moverCasilla = true;
-          casillaSeleccionada();
-          alert("quita casillas jugador1");
-        }
-      } else if (turnoJugador == "jugador2") {
-        if (quedanFichasJugador2) {
-          tablero[fila][columna] = 2;
-          pintarEnCasilla(fila, columna, "red");
-          gestionarTurno(turnoJugador);
-          buscarGanador();
-        } else {
-          moverCasilla = true;
-          alert("quita casillas jugador2");
-        }
+  if (turnoJugador == "jugador1") {
+    if (!hay3CasillasPuestas("jugador1")) {
+      if (tablero[fila][columna] != 1 && tablero[fila][columna] != 2) {
+        tablero[fila][columna] = 1;
+        pintarEnCasilla(fila, columna, "blue");
+        gestionarTurno(turnoJugador);
+        buscarGanador();
+        contfichasjug1--;
+      }
+      if (tipoPartida == "jugadorvsaleatorio" && turnoJugador == "jugador2") {
+        casillaAleatoria();
+      }
+      if (tipoPartida == "jugadorvsia" && turnoJugador == "jugador2") {
+        colocarIA();
       }
     } else {
-      alert("La casilla ya esta seleccionada");
+      if (tablero[fila][columna] == 1) {
+        tablero[fila][columna] = 0;
+        pintarEnCasilla(fila, columna, "transparent");
+        contfichasjug1++;
+      }
+    }
+  } else if (turnoJugador == "jugador2") {
+    if (!hay3CasillasPuestas("jugador2")) {
+      if (tablero[fila][columna] != 2 && tablero[fila][columna] != 1) {
+        tablero[fila][columna] = 2;
+        pintarEnCasilla(fila, columna, "red");
+        gestionarTurno(turnoJugador);
+        buscarGanador();
+        contfichasjug2--;
+      }
+    } else {
+      if (tablero[fila][columna] == 2) {
+        tablero[fila][columna] = 0;
+        pintarEnCasilla(fila, columna, "black");
+        contfichasjug2++;
+      }
     }
   }
   quedanCasillas();
@@ -510,6 +531,23 @@ function cronometro() {
         contadorjugador2.innerHTML = "Tiempo restante: " + segundos;
         contadorjugador1.innerHTML = "Tiempo Restante: 0";
       }
+    }
+  }, 1000);
+}
+
+/*CONTADOR PARA LOS SEGUNDOS RESTANTES DEL MOVIMIENTO*/
+function cronometroTotal() {
+  let segundos = 180;
+
+  contadorTotal = setInterval(function () {
+    if (segundos == 0) {
+      partidasempatadasjugador1++;
+      partidasempatadasjugador2++;
+      alert("Se acabó el tiempo");
+      generarJuego();
+    } else {
+      segundos--;
+      tiempoTotalTexto.textContent = "Tiempo restante de Partida: " + segundos;
     }
   }, 1000);
 }
