@@ -406,6 +406,50 @@ function casillaAleatoria() {
     casillaAleatoria();
   }
 }
+
+function casillaAleatoriaSeisFichas() {
+  let filaleatoria = Math.floor(Math.random() * 3);
+  let columnaleatoria = Math.floor(Math.random() * 3);
+
+  if (!hay3CasillasPuestas("jugador2")) {
+    //alert("quedan casillas");
+    if (tablero[filaleatoria][columnaleatoria] == 0) {
+      contfichasjug2--;
+      pintarEnCasilla(filaleatoria, columnaleatoria, "red");
+      tablero[filaleatoria][columnaleatoria] = 2;
+      turnoJugador = "jugador1";
+      textoturno.textContent = "Turno del Jugador 1";
+      buscarGanador();
+    } else {
+      casillaAleatoriaSeisFichas();
+    }
+  } else {
+    //alert("NO quedan casillas");
+    let filaleatoria2 = Math.floor(Math.random() * 3);
+    let columnaleatoria2 = Math.floor(Math.random() * 3);
+
+    if (tablero[filaleatoria2][columnaleatoria2] == 2) {
+      tablero[filaleatoria2][columnaleatoria2] = 0;
+      pintarEnCasilla(filaleatoria2, columnaleatoria2, "transparent");
+      contfichasjug2++;
+      let filaleatoria3 = Math.floor(Math.random() * 3);
+      let columnaleatoria3 = Math.floor(Math.random() * 3);
+      if (tablero[filaleatoria3][columnaleatoria3] == 0) {
+        contfichasjug2--;
+        tablero[filaleatoria3][columnaleatoria3] = 2;
+        pintarEnCasilla(filaleatoria3, columnaleatoria3, "red");
+        turnoJugador = "jugador1";
+        textoturno.textContent = "Turno del Jugador 1";
+        buscarGanador();
+      } else {
+        casillaAleatoriaSeisFichas();
+      }
+    } else {
+      casillaAleatoriaSeisFichas();
+    }
+  }
+}
+
 function gestionarCasillaSeisFichas(fila, columna) {
   if (turnoJugador == "jugador1") {
     if (!hay3CasillasPuestas("jugador1")) {
@@ -417,7 +461,7 @@ function gestionarCasillaSeisFichas(fila, columna) {
         contfichasjug1--;
       }
       if (tipoPartida == "jugadorvsaleatorio" && turnoJugador == "jugador2") {
-        casillaAleatoria();
+        casillaAleatoriaSeisFichas();
       }
       if (tipoPartida == "jugadorvsia" && turnoJugador == "jugador2") {
         colocarIA();
@@ -547,6 +591,21 @@ function cronometroTotal() {
 
 /*FUNCION DE COLOCAR UNA CASILLA POR PARTE DE LA IA*/
 function colocarIA() {
+  if (tipoFichas == "seisfichas") {
+    if (hay3CasillasPuestas("jugador2")) {
+      let filaleatoria = Math.floor(Math.random() * 3);
+      let columnaleatoria = Math.floor(Math.random() * 3);
+      if (tablero[filaleatoria][columnaleatoria] == 2) {
+        tablero[filaleatoria][columnaleatoria] = 0;
+        pintarEnCasilla(filaleatoria, columnaleatoria, "transparent");
+        contfichasjug2++;
+      } else {
+        colocarIA();
+        return;
+      }
+    }
+  }
+
   for (let i = 0; i < 3; i++) {
     /*LA IA TRATA DE GANAR SIN MIRAR SI TE BLOQUEA O No*/
     if (tablero[i][0] == 2 && tablero[i][1] == 2 && tablero[i][2] == 0) {
@@ -554,6 +613,7 @@ function colocarIA() {
       tablero[i][2] = 2;
       turnoJugador = "jugador1";
       textoturno.textContent = "Turno del Jugador 1";
+      contfichasjug2--;
       buscarGanador();
       return;
     }
@@ -562,6 +622,8 @@ function colocarIA() {
       tablero[i][1] = 2;
       turnoJugador = "jugador1";
       textoturno.textContent = "Turno del Jugador 1";
+      contfichasjug2--;
+
       buscarGanador();
       return;
     }
@@ -570,6 +632,8 @@ function colocarIA() {
       tablero[i][0] = 2;
       turnoJugador = "jugador1";
       textoturno.textContent = "Turno del Jugador 1";
+      contfichasjug2--;
+
       buscarGanador();
       return;
     }
@@ -578,6 +642,8 @@ function colocarIA() {
       tablero[2][i] = 2;
       turnoJugador = "jugador1";
       textoturno.textContent = "Turno del Jugador 1";
+      contfichasjug2--;
+
       buscarGanador();
       return;
     }
@@ -586,6 +652,8 @@ function colocarIA() {
       tablero[1][i] = 2;
       turnoJugador = "jugador1";
       textoturno.textContent = "Turno del Jugador 1";
+      contfichasjug2--;
+
       buscarGanador();
       return;
     }
@@ -594,6 +662,8 @@ function colocarIA() {
       tablero[0][i] = 2;
       turnoJugador = "jugador1";
       textoturno.textContent = "Turno del Jugador 1";
+      contfichasjug2--;
+
       buscarGanador();
       return;
     }
@@ -603,6 +673,8 @@ function colocarIA() {
       tablero[i][2] = 2;
       turnoJugador = "jugador1";
       textoturno.textContent = "Turno del Jugador 1";
+      contfichasjug2--;
+
       buscarGanador();
       return;
     }
@@ -611,6 +683,8 @@ function colocarIA() {
       tablero[i][1] = 2;
       turnoJugador = "jugador1";
       textoturno.textContent = "Turno del Jugador 1";
+      contfichasjug2--;
+
       buscarGanador();
       return;
     }
@@ -619,6 +693,8 @@ function colocarIA() {
       tablero[i][0] = 2;
       turnoJugador = "jugador1";
       textoturno.textContent = "Turno del Jugador 1";
+      contfichasjug2--;
+
       buscarGanador();
       return;
     }
@@ -627,6 +703,8 @@ function colocarIA() {
       tablero[2][i] = 2;
       turnoJugador = "jugador1";
       textoturno.textContent = "Turno del Jugador 1";
+      contfichasjug2--;
+
       buscarGanador();
       return;
     }
@@ -635,6 +713,8 @@ function colocarIA() {
       tablero[1][i] = 2;
       turnoJugador = "jugador1";
       textoturno.textContent = "Turno del Jugador 1";
+      contfichasjug2--;
+
       buscarGanador();
       return;
     }
@@ -643,6 +723,8 @@ function colocarIA() {
       tablero[0][i] = 2;
       turnoJugador = "jugador1";
       textoturno.textContent = "Turno del Jugador 1";
+      contfichasjug2--;
+
       buscarGanador();
       return;
     }
@@ -653,6 +735,8 @@ function colocarIA() {
     tablero[2][2] = 2;
     turnoJugador = "jugador1";
     textoturno.textContent = "Turno del Jugador 1";
+    contfichasjug2--;
+
     buscarGanador();
     return;
   }
@@ -661,6 +745,8 @@ function colocarIA() {
     tablero[1][1] = 2;
     turnoJugador = "jugador1";
     textoturno.textContent = "Turno del Jugador 1";
+    contfichasjug2--;
+
     buscarGanador();
     return;
   }
@@ -669,6 +755,8 @@ function colocarIA() {
     tablero[0][0] = 2;
     turnoJugador = "jugador1";
     textoturno.textContent = "Turno del Jugador 1";
+    contfichasjug2--;
+
     buscarGanador();
     return;
   }
@@ -677,6 +765,8 @@ function colocarIA() {
     tablero[2][0] = 2;
     turnoJugador = "jugador1";
     textoturno.textContent = "Turno del Jugador 1";
+    contfichasjug2--;
+
     buscarGanador();
     return;
   }
@@ -685,6 +775,8 @@ function colocarIA() {
     tablero[0][2] = 2;
     turnoJugador = "jugador1";
     textoturno.textContent = "Turno del Jugador 1";
+    contfichasjug2--;
+
     buscarGanador();
     return;
   }
@@ -694,6 +786,8 @@ function colocarIA() {
     tablero[2][2] = 2;
     turnoJugador = "jugador1";
     textoturno.textContent = "Turno del Jugador 1";
+    contfichasjug2--;
+
     buscarGanador();
     return;
   }
@@ -702,6 +796,8 @@ function colocarIA() {
     tablero[1][1] = 2;
     turnoJugador = "jugador1";
     textoturno.textContent = "Turno del Jugador 1";
+    contfichasjug2--;
+
     buscarGanador();
     return;
   }
@@ -710,6 +806,8 @@ function colocarIA() {
     tablero[0][0] = 2;
     turnoJugador = "jugador1";
     textoturno.textContent = "Turno del Jugador 1";
+    contfichasjug2--;
+
     buscarGanador();
     return;
   }
@@ -718,6 +816,8 @@ function colocarIA() {
     tablero[2][0] = 2;
     turnoJugador = "jugador1";
     textoturno.textContent = "Turno del Jugador 1";
+    contfichasjug2--;
+
     buscarGanador();
     return;
   }
@@ -726,11 +826,14 @@ function colocarIA() {
     tablero[0][2] = 2;
     turnoJugador = "jugador1";
     textoturno.textContent = "Turno del Jugador 1";
+    contfichasjug2--;
+
     buscarGanador();
     return;
   }
 
   casillaAleatoria();
+  contfichasjug2--;
 }
 
 gestionarBotones();
