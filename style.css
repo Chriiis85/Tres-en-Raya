@@ -262,8 +262,6 @@ h2 {
   text-align: left;
   text-decoration: none;
   transition: box-shadow 0.15s, transform 0.15s;
-  user-select: none;
-  -webkit-user-select: none;
   touch-action: manipulation;
   white-space: nowrap;
   will-change: box-shadow, transform;
@@ -289,7 +287,7 @@ h2 {
 .modal {
   width: 600px;
   height: 500px;
-  margin-top: 180px;
+  margin-top: 200px;
   padding: 30px;
   font-family: "Bebas Neue", sans-serif;
   background-color: white;
@@ -307,18 +305,14 @@ h2 {
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.modal > h2,
-p,
-h3 {
-  margin: 0;
-}
-
 .modal > h2 {
+  margin: 0;
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 1.5em;
 }
 
 .modal > p {
+  margin: 0;
   font-size: 1em;
 }
