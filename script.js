@@ -5,6 +5,7 @@ let textoturno = document.getElementById("turnojugador");
 let contadorjugador1 = document.getElementById("contador-1");
 let contadorjugador2 = document.getElementById("contador-2");
 let tiempoTotalTexto = document.getElementById("tiempo-partida");
+let modal = document.getElementById("modal");
 
 /*BOTONES DEL DOM CADA UNO*/
 let botonjug = document.getElementById("jugjug");
@@ -15,6 +16,8 @@ let botonnuevefichas = document.getElementById("nuevefichas");
 
 /*BOOLEANO SI QUEDAN CASILLAS*/
 var restanCasillas = true;
+/*BOOLEANO PARA VER SI GANA LA PARTIDA*/
+var seHaGanado = false;
 /*RECOGER DOM CONTADOR DE PARTIDAS*/
 let textopartidasganadasjugador1 =
   document.getElementById("partidas-ganadas-1");
@@ -61,15 +64,17 @@ let moverCasilla = false;
 
 /*RESETEAR LA PARTIDA */
 function reset() {
+  modal.style.display = "none";
   clearInterval(contador);
   clearInterval(tiempoTotal);
+  seHaGanado = false;
   contfichasjug1 = 3;
   contfichasjug2 = 3;
   tiempoTotalTexto.textContent = "Tiempo restante de Partida: 0";
   contadorjugador1.innerHTML = "Tiempo Restante: 0";
   contadorjugador2.innerHTML = "Tiempo Restante: 0";
   turnoJugador = "jugador1";
-  textoturno.textContent = "Turno del Jugador 1";
+  textoturno.textContent = "Nueva Partida - Turno del Jugador 1";
 }
 
 /*RESETEAR LOS BOTONES SELECCIONADOS*/
@@ -176,6 +181,7 @@ function hay3CasillasPuestas(jugador) {
     }
   }
 }
+
 /*PINTAR CASILLA QUE SE SELECCIONE*/
 function pintarEnCasilla(fila, columna, color) {
   let td = tabla.children[fila].children[columna];
@@ -209,7 +215,8 @@ function gestionarBotones() {
           gestionarJuego();
           break;
         case "empezardenuevo":
-          generarJuego();
+          $("#exampleModal").modal();
+          //generarJuego();
           break;
       }
     });
@@ -259,9 +266,6 @@ function gestionarJuego() {
           reset();
           generarJuego();
           break;
-
-        default:
-          break;
       }
       break;
   }
@@ -292,66 +296,97 @@ function buscarGanador() {
   if (tablero[0][0] == 1 && tablero[0][1] == 1 && tablero[0][2] == 1) {
     partidasganadasjugador1++;
     partidasperdidasjugador2++;
+    seHaGanado = true;
     mostrarGanador();
   } else if (tablero[1][0] == 1 && tablero[1][1] == 1 && tablero[1][2] == 1) {
     partidasganadasjugador1++;
     partidasperdidasjugador2++;
+    seHaGanado = true;
+
     mostrarGanador();
   } else if (tablero[2][0] == 1 && tablero[2][1] == 1 && tablero[2][2] == 1) {
     partidasganadasjugador1++;
     partidasperdidasjugador2++;
+    seHaGanado = true;
+
     mostrarGanador();
   } else if (tablero[0][0] == 2 && tablero[0][1] == 2 && tablero[0][2] == 2) {
     partidasganadasjugador2++;
     partidasperdidasjugador1++;
+    seHaGanado = true;
+
     mostrarGanador();
   } else if (tablero[1][0] == 2 && tablero[1][1] == 2 && tablero[1][2] == 2) {
     partidasganadasjugador2++;
     partidasperdidasjugador1++;
+    seHaGanado = true;
+
     mostrarGanador();
   } else if (tablero[2][0] == 2 && tablero[2][1] == 2 && tablero[2][2] == 2) {
     partidasganadasjugador2++;
     partidasperdidasjugador1++;
+    seHaGanado = true;
+
     mostrarGanador();
   } else if (tablero[0][0] == 1 && tablero[1][0] == 1 && tablero[2][0] == 1) {
     partidasganadasjugador1++;
     partidasperdidasjugador2++;
+    seHaGanado = true;
+
     mostrarGanador();
   } else if (tablero[0][1] == 1 && tablero[1][1] == 1 && tablero[2][1] == 1) {
     partidasganadasjugador1++;
     partidasperdidasjugador2++;
+    seHaGanado = true;
+
     mostrarGanador();
   } else if (tablero[0][2] == 1 && tablero[1][2] == 1 && tablero[2][2] == 1) {
     partidasganadasjugador1++;
     partidasperdidasjugador2++;
+    seHaGanado = true;
+
     mostrarGanador();
   } else if (tablero[0][0] == 2 && tablero[1][0] == 2 && tablero[2][0] == 2) {
     partidasganadasjugador2++;
     partidasperdidasjugador1++;
+    seHaGanado = true;
+
     mostrarGanador();
   } else if (tablero[0][1] == 2 && tablero[1][1] == 2 && tablero[2][1] == 2) {
     partidasganadasjugador2++;
     partidasperdidasjugador1++;
+    seHaGanado = true;
+
     mostrarGanador();
   } else if (tablero[0][2] == 2 && tablero[1][2] == 2 && tablero[2][2] == 2) {
     partidasganadasjugador2++;
     partidasperdidasjugador1++;
+    seHaGanado = true;
+
     mostrarGanador();
   } else if (tablero[0][0] == 1 && tablero[1][1] == 1 && tablero[2][2] == 1) {
     partidasganadasjugador1++;
     partidasperdidasjugador2++;
+    seHaGanado = true;
+
     mostrarGanador();
   } else if (tablero[0][2] == 1 && tablero[1][1] == 1 && tablero[2][0] == 1) {
     partidasganadasjugador1++;
     partidasperdidasjugador2++;
+    seHaGanado = true;
+
     mostrarGanador();
   } else if (tablero[0][0] == 2 && tablero[1][1] == 2 && tablero[2][2] == 2) {
     partidasganadasjugador2++;
     partidasperdidasjugador1++;
+    seHaGanado = true;
+
     mostrarGanador();
   } else if (tablero[0][2] == 2 && tablero[1][1] == 2 && tablero[2][0] == 2) {
     partidasganadasjugador2++;
     partidasperdidasjugador1++;
+    seHaGanado = true;
+
     mostrarGanador();
   }
 }
@@ -396,7 +431,10 @@ function empatarPartida() {
 function casillaAleatoria() {
   let filaleatoria = Math.floor(Math.random() * 3);
   let columnaleatoria = Math.floor(Math.random() * 3);
-  if (tablero[filaleatoria][columnaleatoria] == 0) {
+  if (
+    tablero[filaleatoria][columnaleatoria] == 0 &&
+    turnoJugador == "jugador2"
+  ) {
     pintarEnCasilla(filaleatoria, columnaleatoria, "red");
     tablero[filaleatoria][columnaleatoria] = 2;
     turnoJugador = "jugador1";
@@ -412,8 +450,10 @@ function casillaAleatoriaSeisFichas() {
   let columnaleatoria = Math.floor(Math.random() * 3);
 
   if (!hay3CasillasPuestas("jugador2")) {
-    //alert("quedan casillas");
-    if (tablero[filaleatoria][columnaleatoria] == 0) {
+    if (
+      tablero[filaleatoria][columnaleatoria] == 0 &&
+      turnoJugador == "jugador2"
+    ) {
       contfichasjug2--;
       pintarEnCasilla(filaleatoria, columnaleatoria, "red");
       tablero[filaleatoria][columnaleatoria] = 2;
@@ -424,7 +464,6 @@ function casillaAleatoriaSeisFichas() {
       casillaAleatoriaSeisFichas();
     }
   } else {
-    //alert("NO quedan casillas");
     let filaleatoria2 = Math.floor(Math.random() * 3);
     let columnaleatoria2 = Math.floor(Math.random() * 3);
 
@@ -491,7 +530,7 @@ function gestionarCasillaSeisFichas(fila, columna) {
     }
   }
   quedanCasillas();
-  if (!restanCasillas) {
+  if (!restanCasillas && !seHaGanado) {
     empatarPartida();
   }
 }
@@ -525,7 +564,7 @@ function gestionarCasilla(fila, columna) {
     }
   }
   quedanCasillas();
-  if (!restanCasillas) {
+  if (!restanCasillas && !seHaGanado) {
     empatarPartida();
   }
 }
@@ -835,5 +874,5 @@ function colocarIA() {
   casillaAleatoria();
   contfichasjug2--;
 }
-
 gestionarBotones();
+mostrarEstadisticas();

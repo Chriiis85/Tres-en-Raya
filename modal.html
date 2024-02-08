@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+    body {
+      background-color: #252525;
+    }
+    .modal {
+      width: 300px;
+      height: 300px;
+      padding: 20px;
+      font-family: "Bebas Neue", sans-serif;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      border: 3px solid black;
+      border-radius: 15px;
+      gap: 5px;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
+
+    .modal > p,
+    h1 {
+      margin: 0;
+    }
+  </style>
+  <body>
+    <section class="modal">
+      <h1>INSTRUCCIONES DEL TRES EN RAYA</h1>
+      <h2>Reglas del Juego:</h2>
+      <p>
+        - El objetivo del juego es juntar 3 fichas del mismo color para ganar.
+        Se pueden combinar en horizontal,vertical o diagonal.
+      </p>
+      <p>
+        - Cada jugador tendrá 30 segundos para posicionar una ficha, si se agota
+        el tiempo el jugador perderá la partida.
+      </p>
+      <p>
+        - La duracion de la partida es de tres minutos, si el contador llega a
+        cero, la partida terminará en empate.
+      </p>
+      <p>
+        Si se desea empezar de nuevo una partida, clicando en el boton "Empezar
+        de nuevo", se reiniciará el tablero.
+      </p>
+      <h2>Modos de Juego segun el numero de Fichas:</h2>
+      <p>
+        - Seis Fichas: Cada jugador contará con tres fichas para posicionar,
+        tendrán como objetivo combinar tres de estas para ganar el juego. En
+        cada turno al llegar a 3 fichas puestas se tendrá que cambiar una de
+        ellas de posición.
+      </p>
+      <p>
+        - Nueve Fichas: Los jugadores pondrán fichas hasta agotar la capacidad
+        del tablero. El jugador que logre combinar tres fichas ganará, en caso
+        de que se rellenen todas las casillas la partida terminará en empate.
+      </p>
+      <h2>Modos de Juego segun el Oponente:</h2>
+      <p>Jugador vs Jugador:</p>
+      <p>
+        Jugador vs Aleatorio: El jugador posicionará fichas, mientras que en el
+        turno del ordenador, este posicionará fichas aleatorias.
+      </p>
+      <p>Jugador vs Jugador:</p>
+    </section>
+  </body>
+</html>

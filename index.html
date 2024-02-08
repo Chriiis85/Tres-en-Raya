@@ -6,16 +6,80 @@
     <title>Tres en Raya - Christian</title>
     <link rel="stylesheet" href="style.css" />
     <script defer src="script.js"></script>
+    <link rel="icon" type="image/png" href="descarga.png" />
   </head>
 
   <body>
     <h1 id="titulo">EL JUEGO DE LAS TRES EN RAYA</h1>
 
     <section id="contenido" class="contenido">
+      <section id="modal" class="modal">
+        <h2>Reglas del Juego:</h2>
+        <p>
+          - Se deberá seleccioar un modo de fichas y posteriormente el modo de
+          jugador. Clicando en el boton "Empezar de nuevo", se reiniciará el
+          tablero.
+        </p>
+        <p>
+          - El objetivo del juego es juntar 3 fichas del mismo color para ganar.
+          Se pueden combinar en horizontal,vertical o diagonal.
+        </p>
+        <p>
+          - Cada jugador tendrá 30 segundos para posicionar una ficha, si se
+          agota el tiempo el jugador perderá la partida.
+        </p>
+        <p>
+          - La duracion de la partida es de tres minutos, si el contador llega a
+          cero, la partida terminará en empate.
+        </p>
+        <h2>Modos de Juego segun el numero de Fichas:</h2>
+        <p>
+          <b>- Seis Fichas:</b> Cada jugador contará con tres fichas para
+          posicionar, tendrán como objetivo combinar tres de estas para ganar el
+          juego. En cada turno al llegar a 3 fichas puestas se tendrá que
+          cambiar una de ellas de posición.
+        </p>
+        <p>
+          <b>- Nueve Fichas:</b> Los jugadores pondrán fichas hasta agotar la
+          capacidad del tablero. El jugador que logre combinar tres fichas
+          ganará, en caso de que se rellenen todas las casillas la partida
+          terminará en empate.
+        </p>
+        <h2>Modos de Juego segun el Oponente:</h2>
+        <p>
+          <b>- Jugador vs Jugador:</b> El jugador 1 competirá contra el jugador
+          2 con el objetivo de conseguir la victoria.
+        </p>
+        <p>
+          <b>- Jugador vs Aleatorio:</b> El jugador posicionará fichas, mientras
+          que en el turno del ordenador, este posicionará fichas aleatoriamente.
+        </p>
+        <p>
+          <b>- Jugador vs IA:</b> El jugador posicionará fichas tratando de
+          ganar, mientras que en el turno del ordenador, este posicionará las
+          fichas evitando que gane el jugador y tratando de conseguir una
+          combinación ganadora.
+        </p>
+      </section>
       <p id="turnojugador"></p>
       <table class="tabla-juego" id="tabla"></table>
     </section>
     <section class="estadistica">
+      <article class="modojuegofichas">
+        <h2>Selecciona el Modo de Juego:</h2>
+        <div>
+          <button id="seisfichas" class="button-30" role="button">
+            Jugar con 6 Fichas
+          </button>
+          <button id="empezardenuevo" class="button-30" role="button">
+            Empezar de nuevo
+          </button>
+          <button id="nuevefichas" class="button-30" role="button">
+            Jugar con 9 Fichas
+          </button>
+        </div>
+      </article>
+
       <article class="modosjuegojugadores">
         <h2>Selecciona el Modo de Jugador:</h2>
         <div>
@@ -30,6 +94,7 @@
           </button>
         </div>
       </article>
+
       <article class="tiempo">
         <h2>Tiempo de Juego Y Resultados:</h2>
         <div class="main-contenedor-juego">
@@ -44,7 +109,7 @@
                     <td>Ganado:</td>
                     <td id="partidas-ganadas-1"></td>
                   </tr>
-                  <tr>
+                  <tr class="perdido">
                     <td>Perdido:</td>
                     <td id="partidas-perdidas-1"></td>
                   </tr>
@@ -71,7 +136,7 @@
                     <td>Ganado:</td>
                     <td id="partidas-ganadas-2"></td>
                   </tr>
-                  <tr>
+                  <tr class="perdido">
                     <td>Perdido:</td>
                     <td id="partidas-perdidas-2"></td>
                   </tr>
@@ -88,20 +153,6 @@
           </div>
         </div>
         <p id="tiempo-partida">Tiempo Restante de Partida: 0</p>
-      </article>
-      <article class="modojuegofichas">
-        <h2>Selecciona el Modo de Juego:</h2>
-        <div>
-          <button id="seisfichas" class="button-30" role="button">
-            Jugar con 6 Fichas
-          </button>
-          <button id="empezardenuevo" class="button-30" role="button">
-            Empezar de nuevo
-          </button>
-          <button id="nuevefichas" class="button-30" role="button">
-            Jugar con 9 Fichas
-          </button>
-        </div>
       </article>
     </section>
   </body>
