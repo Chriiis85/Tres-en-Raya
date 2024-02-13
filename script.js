@@ -873,5 +873,8 @@ function colocarIA() {
   casillaAleatoria();
   contfichasjug2--;
 }
+contadorjugador1.textContent = "Tiempo Restante 0";
+contadorjugador2.textContent = "Tiempo Restante 0";
+
 gestionarBotones();
 mostrarEstadisticas();
