@@ -215,8 +215,7 @@ function gestionarBotones() {
           gestionarJuego();
           break;
         case "empezardenuevo":
-          $("#exampleModal").modal();
-          //generarJuego();
+          generarJuego();
           break;
       }
     });
