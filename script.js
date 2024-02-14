@@ -4,6 +4,8 @@ let botones = document.querySelectorAll("button");
 let textoturno = document.getElementById("turnojugador");
 let contadorjugador1 = document.getElementById("contador-1");
 let contadorjugador2 = document.getElementById("contador-2");
+contadorjugador1.textContent = "Tiempo Restante: 0";
+contadorjugador2.textContent = "Tiempo Restante: 0";
 let tiempoTotalTexto = document.getElementById("tiempo-partida");
 let modal = document.getElementById("modal");
 
@@ -873,8 +875,6 @@ function colocarIA() {
   casillaAleatoria();
   contfichasjug2--;
 }
-contadorjugador1.textContent = "Tiempo Restante 0";
-contadorjugador2.textContent = "Tiempo Restante 0";
 
 gestionarBotones();
 mostrarEstadisticas();
